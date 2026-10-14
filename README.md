@@ -103,3 +103,14 @@ Details that still need the owner's confirmation are listed in `NEEDS_CONFIRMATI
 
 ## Publishing changes (cache busting)
 GitHub Pages lets browsers cache files for about 10 minutes, which can leave a visitor with a new page and an old script. After editing anything in `css/`, `js/` or `data/`, run `sh tools/bump-version.sh` before committing. It updates the `?v=` tag on every asset link; `tests/run_all.sh` fails if the tags disagree.
+
+
+## Deployment (GitHub Pages)
+- **Type:** plain static site (HTML, CSS, vanilla JS). No `package.json`, no framework, no build step: the repository root *is* the build output.
+- **Published from:** branch `main`, folder `/ (root)`, by GitHub's built-in "pages build and deployment" workflow. There is no workflow file in the repo and none is needed. (`.nojekyll` makes GitHub serve the files as they are.)
+- **Production URL:** https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/ (repository `subcoresolutions-cloud/Ha-dhe-Hesht-Website`).
+- **Paths:** every link in `index.html`, the CSS and the JS is relative (`css/…`, `js/…`, `assets/…`), so the site works under the `/Ha-dhe-Hesht-Website/` base path and would also work on a custom domain. The page is one screen with `#anchors`, so there is no client-side router to configure. Unknown addresses show `404.html`.
+- **Checklist before pushing:** `sh tools/bump-version.sh` (cache busting), then `sh tests/run_all.sh`. `tests/test_production.py` copies the files git would publish into a `/Ha-dhe-Hesht-Website/` folder, serves them like Pages (no custom headers, 404 page), and tests the home page, assets, MIME types, direct links, refresh, 404 page, CSP and WhatsApp ordering there.
+- **Security headers:** GitHub Pages ignores `_headers`, so the same Content-Security-Policy is also set with a `<meta>` tag in `index.html`. `tools/check-assets.js` fails if the two differ. (`frame-ancestors`, clickjacking protection, cannot be set from a meta tag on GitHub Pages.)
+- **If you add a custom domain:** (1) GitHub → Settings → Pages → Custom domain, and enable Enforce HTTPS; (2) replace the production URL in `index.html` (canonical, `og:url`, `og:image`, `twitter:image`, JSON-LD), `sitemap.xml`, `robots.txt`; (3) change `<base href>` in `404.html` to `/`; (4) run `node tools/check-assets.js`.
+- Everything in the repository root is public, including `tests/`, `tools/` and the research JSON; none of it contains secrets.

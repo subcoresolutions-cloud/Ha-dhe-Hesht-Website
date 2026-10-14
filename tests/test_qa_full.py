@@ -132,7 +132,7 @@ with sync_playwright() as p:
     check('no duplicate ids',not r['dupIds'],r['dupIds']); check('all buttons/links have names',not r['unnamedButtons'],r['unnamedButtons'][:3]); check('all images have alt attr',r['noAlt']==0)
     check('all form fields labelled',not r['unlabeled'],r['unlabeled']); check('single h1',r['h1']==1,r['h1']); check('landmarks header/nav/main/footer present',all(x>=1 for x in r['landmarks']),r['landmarks'])
     check('lang + title + description + OG present',r['lang']=='sq' and 20<r['title']<=70 and 70<r['desc']<=170 and r['og'],(r['title'],r['desc']))
-    ld=r['ld']; check('JSON-LD has only verified fields', set(ld)<= {'@context','@type','name','servesCuisine','telephone','address','sameAs','image'} and set(ld['address'])<= {'@type','addressLocality','addressCountry'}, ld)
+    ld=r['ld']; check('JSON-LD has only verified fields', set(ld)<= {'@context','@type','name','servesCuisine','telephone','address','sameAs','image','url'} and set(ld['address'])<= {'@type','addressLocality','addressCountry'}, ld)
     check('decorative/unlabelled svg hidden from AT',r['svgNoHide']==0,r['svgNoHide']); print('  small targets (<32px):',r['small'])
     ctx.close(); b.close()
 print(f'\n{sum(res)} / {len(res)} passed'); print('FAILED:',fails)

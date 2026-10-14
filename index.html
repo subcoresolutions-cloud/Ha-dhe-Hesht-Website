@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- GitHub Pages ignores _headers, so the same policy is applied here (frame-ancestors cannot be set from a meta tag). Keep in sync with _headers: tools/check-assets.js verifies it. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.google.com; base-uri 'none'; form-action 'none'">
 <title>Ha dhe Hesht – Pica & sanduiçe në Vlorë | Porosit në WhatsApp</title>
 <meta name="description" content="Ha dhe Hesht, pizzeri në Vlorë. Shiko menunë me çmime në lekë, shto në shportë dhe dërgo porosinë direkt në WhatsApp. Pica pa fjalë, shije me zë!">
 <meta name="robots" content="index, follow">
@@ -14,22 +16,24 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Ha dhe Hesht – Pica pa fjalë, shije me zë!">
 <meta property="og:description" content="Pica, sanduiçe dhe pije në Vlorë. Porosit online përmes WhatsApp.">
-<meta property="og:image" content="assets/logo.jpg">
+<meta property="og:url" content="https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/">
+<meta property="og:image" content="https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/assets/logo.jpg">
 <meta property="og:image:alt" content="Logo e Ha dhe Hesht">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ha dhe Hesht – Pica pa fjalë, shije me zë!">
 <meta name="twitter:description" content="Pica, sanduiçe dhe pije në Vlorë. Porosit online përmes WhatsApp.">
-<meta name="twitter:image" content="assets/logo.jpg">
-<!-- Before launch: add <link rel="canonical" href="https://YOUR-DOMAIN/"> and <meta property="og:url" ...>, and make og:image / twitter:image absolute URLs (see README). -->
+<meta name="twitter:image" content="https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/assets/logo.jpg">
+<!-- Production URL (GitHub Pages project site). If a custom domain is added later, change this URL in og:url, og:image, twitter:image, the JSON-LD below, sitemap.xml, robots.txt and the <base> of 404.html (tools/check-assets.js reports any mismatch). -->
+<link rel="canonical" href="https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/">
 <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
 <link rel="apple-touch-icon" href="assets/logo.jpg">
-<link rel="stylesheet" href="css/styles.css?v=202610150050">
+<link rel="stylesheet" href="css/styles.css?v=202610150054">
 <!-- Structured data: ONLY facts confirmed by public listings (name, city, country, phone, Instagram). No street address, hours, price range or geo until the owner verifies them. Keep in sync with js/data.js. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"Ha dhe Hesht",
 "servesCuisine":["Pizza","Sandwiches"],"telephone":"+355693812566",
 "address":{"@type":"PostalAddress","addressLocality":"Vlorë","addressCountry":"AL"},
-"sameAs":["https://www.instagram.com/hadhehesht/"],"image":"assets/logo.jpg"}
+"sameAs":["https://www.instagram.com/hadhehesht/"],"url":"https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/","image":"https://subcoresolutions-cloud.github.io/Ha-dhe-Hesht-Website/assets/logo.jpg"}
 </script>
 </head>
 <body>
@@ -291,8 +295,8 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="js/data.js?v=202610150050"></script>
-<script src="js/art.js?v=202610150050"></script>
-<script src="js/app.js?v=202610150050"></script>
+<script src="js/data.js?v=202610150054"></script>
+<script src="js/art.js?v=202610150054"></script>
+<script src="js/app.js?v=202610150054"></script>
 </body>
 </html>

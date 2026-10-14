@@ -195,7 +195,7 @@
     catalogState = 'loading'; renderAll();
     if (menuScript) menuScript.remove(); try { delete window.HDH_MENU; } catch (e) { window.HDH_MENU = undefined; }
     var sc = document.createElement('script'), finished = false;
-    var ASSET_V = '202610150050';   // set by tools/bump-version.sh (cache busting)
+    var ASSET_V = '202610150054';   // set by tools/bump-version.sh (cache busting)
     sc.src = 'data/menu.js?v=' + (retryCount ? Date.now() : ASSET_V); menuScript = sc;
     function fail(why) { if (finished) return; finished = true; clearTimeout(timer); console.error('[menu] could not load catalog:', why); catalogState = 'error'; renderAll(); }
     var timer = setTimeout(function () { fail('timeout'); }, 10000);
