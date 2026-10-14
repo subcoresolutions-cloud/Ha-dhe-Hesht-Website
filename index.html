@@ -74,9 +74,13 @@
           <a class="btn btn-primary btn-lg" href="#menu" data-en="Order now">Porosit tani</a>
           <a class="btn btn-outline btn-lg" data-bind-href="tel" href="#kontakt">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1Z"/></svg>
-            <span data-bind="phoneDisplay"></span>
+            <span data-bind="phoneDisplay">069 381 2566</span>
           </a>
         </div>
+        <p class="hero-meta">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+          <span data-en="Vlorë · near the Omonia intersection, next to Diambe Market">Vlorë · pranë kryqëzimit të Omonias, ngjitur me Diambe Market</span>
+        </p>
         <ul class="chips" aria-label="Shërbimet" data-en-aria-label="Services">
           <li data-service="pickup" data-en="Pickup">Marrje në lokal</li>
           <li data-service="delivery" data-en="Delivery">Dërgesë</li>
@@ -96,8 +100,16 @@
       <div class="section-head">
         <p class="kicker" data-en="From the menu">Nga menuja</p>
         <h2 id="featTitle" data-en="Featured dishes">Të zgjedhura</h2>
+        <p class="muted" data-en="Pictures are illustrations, not photos of the dishes.">Imazhet janë ilustrime, jo foto të vakteve.</p>
       </div>
-      <ul class="grid grid-scroll" id="featuredList"></ul>
+      <ul class="grid grid-scroll" id="featuredList" aria-busy="true"><!-- loading placeholders: same card size as the real cards, replaced by js/app.js -->
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+        <li class="item skeleton" aria-hidden="true"><div class="media"></div><div class="item-body"><span class="sk w70"></span><span class="sk w90"></span><span class="sk w40"></span></div></li>
+      </ul>
     </div>
   </section>
 
@@ -177,7 +189,7 @@
           <p class="kicker" data-en="Information & contact">Informacion & kontakt</p>
           <h2 id="contactTitle">Hà dhe Hesht</h2>
           <p class="tagline-sm" id="bizTagline"></p>
-          <p class="biz-intro" id="bizIntro"></p>
+          <p class="biz-intro" id="bizIntro" hidden></p>
         </div>
       </div>
       <div class="quick" id="bizQuick"></div>
@@ -207,6 +219,7 @@
         <li><a data-bind-href="tel" data-bind="phoneDisplay" href="#"></a></li>
         <li><a data-bind-href="wa" target="_blank" rel="noopener" href="#">WhatsApp</a></li>
         <li><a data-bind-href="instagram" target="_blank" rel="noopener" href="#" data-bind="instagramHandle"></a></li>
+        <li><a data-bind-href="wolt" target="_blank" rel="noopener" href="#">Wolt</a></li>
         <li data-bind="city"></li>
       </ul>
     </div>

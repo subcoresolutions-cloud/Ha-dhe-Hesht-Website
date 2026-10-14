@@ -1,3 +1,11 @@
+# Design refresh – QA addendum (15 Oct 2026)
+
+New suite `tests/test_design.py` (Chromium, 360 / 390 / 768 / 1024 / 1280 / 1920 px): **48/48 pass**, stable over repeated runs. Together with the existing suites: 13/13 business, 35/35 checkout, 15/15 WhatsApp, 70/70 QA, 53/53 journey; menu audit 0 errors.
+Checked per viewport: no horizontal scroll and nothing outside the viewport; every button, tab, stepper and input ≥ 44 px; layout shift (CLS) ≤ 0.1 (measured 0); no console errors; text contrast ≥ WCAG AA (4.5:1, 3:1 for large text; worst case taken over gradient stops). Also: alt text and image dimensions, illustrations hidden from assistive tech, skip link first, visible focus ring on key controls, landmarks and heading order, `prefers-reduced-motion` (no running animations, no smooth scroll), mobile menu rows, cart drawer fits a 390 px screen.
+Layout shift problems found and fixed during this pass: hero illustration, featured row, category tiles and the hero phone button were filled in by JavaScript after first paint and pushed content down (CLS 0.12–0.56 at tablet/desktop widths).
+Still not tested: real phones and Safari/Firefox, screen readers, Lighthouse, real WhatsApp delivery.
+
+---
 # Hà dhe Hesht – QA report (14 Oct 2026)
 
 Environment: headless Chromium (Playwright), site served locally with the production CSP from `_headers`. Test scripts are in `tests/` (`sh tests/run_all.sh`). Last run: **menu audit OK; 35/35 checkout, 15/15 WhatsApp-message, 13/13 business-section, 70/70 QA-suite and 53/53 end-to-end journey checks passed (186 total); all JS files pass `node --check`.** There is no build step and no linter in the project, so those do not apply.

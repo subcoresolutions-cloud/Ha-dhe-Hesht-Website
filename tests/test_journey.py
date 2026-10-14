@@ -3,6 +3,7 @@ import os,re,json,urllib.parse
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..')+'/'
 from playwright.sync_api import sync_playwright
 BASE='http://localhost:%s/index.html'%os.environ.get('PORT','8766'); res=[]
+import tempfile; SHOTS=os.environ.get('SHOT_DIR') or tempfile.mkdtemp(prefix='hdh_shots_')
 def check(n,ok,i=''):
     res.append(ok); print(('PASS ' if ok else 'FAIL ')+n,(str(i)[:300] if not ok else ''))
 M=json.loads(open(ROOT+'data/menu.js',encoding='utf-8').read().split('window.HDH_MENU = ',1)[1].rstrip().rstrip(';'))
@@ -87,6 +88,6 @@ with sync_playwright() as pw:
     pg.click('#privOpen'); check('privacy dialog opens/closes', pg.is_visible('#privDialog')); pg.click('#privClose'); check('privacy dialog closed', not pg.is_visible('#privDialog'))
     check('no hidden/placeholder text like undefined/NaN/[object', not re.search(r'undefined|NaN|\[object|null',pg.inner_text('body')), re.findall(r'.{20}(?:undefined|NaN|null).{10}',pg.inner_text('body'))[:2])
     check('no JS errors in audit', not errs, errs)
-    pg.screenshot(path='/tmp/claude-0/-home-claude/60d3346c-213b-5ec5-b5c3-11cd8dc85649/scratchpad/final_full.png',full_page=True)
+    pg.screenshot(path=os.path.join(SHOTS,'final_full.png'),full_page=True)
     b.close()
 print(f'\n{sum(res)}/{len(res)} checks passed')

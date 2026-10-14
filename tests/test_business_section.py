@@ -2,6 +2,7 @@ import os
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..')+'/'
 from playwright.sync_api import sync_playwright
 BASE='http://localhost:%s/index.html'%os.environ.get('PORT','8766'); res=[]
+import tempfile; SHOTS=os.environ.get('SHOT_DIR') or tempfile.mkdtemp(prefix='hdh_shots_')
 def check(n,ok,i=''): res.append(ok); print(('PASS ' if ok else 'FAIL ')+n,i)
 src=open(ROOT+'js/data.js',encoding='utf-8').read()
 with sync_playwright() as p:
@@ -19,9 +20,9 @@ with sync_playwright() as p:
             check('delivery unverified note', 'konfirmohen nga pizzeria' in txt and 'ALL' not in pg.inner_text('#bizGrid .svc-list'))
             check('categories chips', pg.locator('.chip-btn').count()==4)
             pg.click('.chip-btn >> nth=2'); pg.wait_for_timeout(500); check('chip filters menu', pg.get_attribute('.tab[aria-pressed=true]','data-cat')!='all')
-            pg.click('#langBtn'); pg.locator('#kontakt').scroll_into_view_if_needed(); check('english', 'Where to find us' in pg.inner_text('#bizGrid') and 'tagline' not in pg.inner_text('#kontakt').lower()[:0] and pg.get_attribute('.biz-logo','alt')=='Hà dhe Hesht logo')
+            pg.click('#langBtn'); pg.locator('#kontakt').scroll_into_view_if_needed(); check('english', 'where to find us' in pg.inner_text('#bizGrid').lower() and 'tagline' not in pg.inner_text('#kontakt').lower()[:0] and pg.get_attribute('.biz-logo','alt')=='Hà dhe Hesht logo')
         pg.locator('#kontakt').scroll_into_view_if_needed(); pg.wait_for_timeout(300)
-        pg.locator('#kontakt').screenshot(path=f'{"/tmp/claude-0/-home-claude/60d3346c-213b-5ec5-b5c3-11cd8dc85649/scratchpad"}/biz_{name}.png')
+        pg.locator('#kontakt').screenshot(path=f'{SHOTS}/biz_{name}.png')
         check(name+' no horizontal overflow', pg.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     # configured variant
     mod=src.replace('hoursList: null','hoursList: [{days_sq:"Çdo ditë",days_en:"Every day",time:"10:00–22:00"}]').replace('email: null','email: "a@b.al"').replace('mapEmbedUrl: null','mapEmbedUrl: "https://www.google.com/maps/embed?pb=x"').replace('verified: false','verified: true').replace('fee: null','fee: 150')

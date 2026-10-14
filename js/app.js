@@ -26,7 +26,7 @@
   var lang = store('hdh_lang') === 'en' ? 'en' : 'sq';
   var T = {
     sq: {
-      add: 'Shto', choose: 'Zgjidh', added: 'U shtua në shportë: ', removed: 'U hoq: ', inCart: 'në shportë',
+      add: 'Shto', addTail: 'në shportë', choose: 'Zgjidh', added: 'U shtua në shportë: ', removed: 'U hoq: ', inCart: 'në shportë',
       inc: 'Shto një', dec: 'Hiq një', remove: 'Hiq', qty: 'Sasia', addNote: 'Shto shënim', editNote: 'Ndrysho shënimin', notePh: 'p.sh. pa qepë, shumë e pjekur…',
       orderNote: 'Shënim për porosinë (opsionale)', orderNotePh: 'p.sh. zilja nuk punon, telefononi kur mbërrini…',
       emptyT: 'Shporta është bosh', emptyP: 'Shto pica, sanduiçe ose pije nga menuja.', browse: 'Shiko menunë',
@@ -63,7 +63,7 @@
       from: 'nga', woltNote: 'Mund të na porosisni edhe në Wolt.', pickupNote: 'Për marrje në lokal, dërgo porosinë paraprakisht në WhatsApp.'
     },
     en: {
-      add: 'Add', choose: 'Choose', added: 'Added to cart: ', removed: 'Removed: ', inCart: 'in cart',
+      add: 'Add', addTail: 'to cart', choose: 'Choose', added: 'Added to cart: ', removed: 'Removed: ', inCart: 'in cart',
       inc: 'Add one', dec: 'Remove one', remove: 'Remove', qty: 'Quantity', addNote: 'Add note', editNote: 'Edit note', notePh: 'e.g. no onions, well done…',
       orderNote: 'Note for the order (optional)', orderNotePh: 'e.g. doorbell is broken, call when you arrive…',
       emptyT: 'Your cart is empty', emptyP: 'Add pizza, sandwiches or drinks from the menu.', browse: 'See the menu',
@@ -304,7 +304,7 @@
     if (!it.available) return '<button type="button" class="add" disabled>' + esc(t('soldOut')) + '</button>';
     if (!orderable(it)) return !WA_OK ? '<span class="add" aria-disabled="true">' + esc(t('askPrice')) + '</span>' : '<a class="add" href="https://wa.me/' + esc(WA_NUMBER) + '?text=' + encodeURIComponent(TS.askPriceMsg + ' ' + it.name_sq) + '" target="_blank" rel="noopener">' + esc(t('askPrice')) + '</a>';
     if (needsDialog(it)) return '<button type="button" class="add" data-act="opts" data-id="' + esc(it.id) + '" aria-label="' + esc(t('choose') + ': ' + name(it)) + '">' + esc(t('choose')) + (q ? ' (' + q + ')' : '') + '</button>';
-    if (!q) return '<button type="button" class="add" data-act="add" data-id="' + esc(it.id) + '" aria-label="' + esc(t('add') + ': ' + name(it) + ', ' + fmt(it.price)) + '">+ ' + esc(t('add')) + '</button>';
+    if (!q) return '<button type="button" class="add" data-act="add" data-id="' + esc(it.id) + '" aria-label="' + esc(t('add') + ': ' + name(it) + ', ' + fmt(it.price)) + '">+ ' + esc(t('add')) + '<span class="add-more"> ' + esc(t('addTail')) + '</span></button>';
     return '<div class="stepper" role="group" aria-label="' + esc(name(it) + ': ' + t('qty')) + '"><button type="button" data-act="dec" data-id="' + esc(it.id) + '" aria-label="' + esc(t('dec') + ': ' + name(it)) + '">−</button><output aria-live="polite">' + q + '</output><button type="button" data-act="inc" data-id="' + esc(it.id) + '" aria-label="' + esc(t('inc') + ': ' + name(it)) + '">+</button></div>';
   }
   function refreshControl(id) {
@@ -688,9 +688,11 @@
     $('#footTagline').textContent = lang === 'en' ? B.tagline_en : B.tagline_sq;
     var note = []; if (O.delivery.enabled) note.push(pick(O.delivery, 'note')); if (O.pickup.enabled) note.push(t('pickupNote')); if (B.woltUrl) note.push(t('woltNote'));
     $('#svcNote').textContent = note.join(' ');
+    /* while the catalog is still loading keep the placeholder cards from index.html (no empty section, no layout shift) */
+    if (catalogState === 'loading') { renderBusiness(); return; }
     var feat = items.filter(function (i) { return i.featured; });
     $('#featured').hidden = !feat.length;
-    $('#featuredList').innerHTML = feat.map(cardHTML).join('');
+    $('#featuredList').innerHTML = feat.map(cardHTML).join(''); $('#featuredList').removeAttribute('aria-busy');
     $('#catTiles').innerHTML = cats.map(function (c) {
       var list = items.filter(function (i) { return i.category === c.id; }); if (!list.length) return '';
       var min = Math.min.apply(null, list.map(function (i) { return i.price; }));
