@@ -100,3 +100,6 @@ See `TEST_REPORT.md` for what was tested and what remains open.
 
 ## Open questions
 Details that still need the owner's confirmation are listed in `NEEDS_CONFIRMATION.md`. Delivery fee/minimum use `feeVerified` / `minOrderVerified` in `js/data.js`.
+
+## Publishing changes (cache busting)
+GitHub Pages lets browsers cache files for about 10 minutes, which can leave a visitor with a new page and an old script. After editing anything in `css/`, `js/` or `data/`, run `sh tools/bump-version.sh` before committing. It updates the `?v=` tag on every asset link; `tests/run_all.sh` fails if the tags disagree.
