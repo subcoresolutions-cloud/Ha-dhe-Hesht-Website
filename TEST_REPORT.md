@@ -52,3 +52,8 @@ Audit result: the cart was already driven by one array (`cart`) with every amoun
 - **Delivery minimum:** checkout now says how much to add (e.g. "Add 220 ALL more") instead of only failing on submit.
 - New `tests/test_cart_reliability.py` (45 checks): the eight requested cases, sizes/extras, double submit, duplicate-order warning, minimum, hostile storage, sold-out item in a saved cart, two tabs. Full suite: 308 checks passing.
 Known limits: no real phone/Safari/Firefox/WhatsApp-delivery testing; the order is never stored server-side (WhatsApp is the only channel), so the pizzeria sees it only when the customer presses Send in WhatsApp.
+
+## WhatsApp ordering addendum (15 Oct 2026)
+The message now follows the owner's template: `NEW ORDER — HA DHE HESHT` (spelled "Ha", per the owner's answer), Customer, Phone, Order type, Address, Location details, `ORDER ITEMS` with `Name × qty / Unit price / Item total / Options/notes` per item, Subtotal, Delivery fee, TOTAL, Additional notes, and "Please confirm availability and the estimated preparation or delivery time."
+`tests/test_whatsapp_exact.py` (33 checks) builds the expected text independently and compares it character for character; it also checks percent-encoding, UTF-8 for Ë/Ç/ë/ç/emoji, number normalisation, same-tab fallback when pop-ups are blocked, the copy fallback, an invalid configured number, and a 40-line order (URL 52,667 chars: the send button is disabled with a warning and Copy is offered; the message is never cut). Full suite 341 checks, all passing.
+The site cannot know whether the customer pressed Send in WhatsApp; it never says the order is confirmed.

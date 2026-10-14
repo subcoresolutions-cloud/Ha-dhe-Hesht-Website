@@ -195,7 +195,7 @@
     catalogState = 'loading'; renderAll();
     if (menuScript) menuScript.remove(); try { delete window.HDH_MENU; } catch (e) { window.HDH_MENU = undefined; }
     var sc = document.createElement('script'), finished = false;
-    var ASSET_V = '202610150035';   // set by tools/bump-version.sh (cache busting)
+    var ASSET_V = '202610150050';   // set by tools/bump-version.sh (cache busting)
     sc.src = 'data/menu.js?v=' + (retryCount ? Date.now() : ASSET_V); menuScript = sc;
     function fail(why) { if (finished) return; finished = true; clearTimeout(timer); console.error('[menu] could not load catalog:', why); catalogState = 'error'; renderAll(); }
     var timer = setTimeout(function () { fail('timeout'); }, 10000);
@@ -548,26 +548,23 @@
     L.push('Phone: ' + oneLine(co.phone));
     L.push('Order type: ' + (del ? 'Delivery' : 'Pickup'));
     if (del) {
-      L.push('Delivery address: ' + oneLine(co.address));
+      L.push('Address: ' + oneLine(co.address));
       if (oneLine(co.location)) L.push('Location details: ' + oneLine(co.location));
     }
-    L.push('ORDER DETAILS');
-    cart.forEach(function (l, i) {
-      var li = lineInfo(l);
-      L.push('');
-      L.push((i + 1) + '. ' + li.it.name_sq + (li.labelsSq.length ? ' (' + li.labelsSq.join(', ') + ')' : ''));
-      L.push('Quantity: ' + l.qty);
+    L.push('ORDER ITEMS');
+    cart.forEach(function (l) {
+      var li = lineInfo(l), opt = [li.labelsSq.join(', '), oneLine(l.note)].filter(Boolean).join(' — ');
+      L.push(li.it.name_sq + ' × ' + l.qty);
       L.push('Unit price: ' + msgMoney(li.unit));
       L.push('Item total: ' + msgMoney(li.total));
-      if (oneLine(l.note)) L.push('Notes: ' + oneLine(l.note));
+      if (opt) L.push('Options/notes: ' + opt);
     });
-    L.push('');
     L.push('Subtotal: ' + msgMoney(T_.subtotal));
     if (del) L.push('Delivery fee: ' + (T_.feePending ? 'to be confirmed by the pizzeria' : msgMoney(T_.fee)));
     L.push('TOTAL: ' + msgMoney(T_.total) + (del && T_.feePending ? ' (excluding delivery fee)' : ''));
     if (oneLine(co.orderNote)) L.push('Additional notes: ' + oneLine(co.orderNote));
     if (hasAlcohol() && co.ageOk) L.push('Customer confirms they are 18 or older.');
-    L.push('Please confirm this order and its estimated preparation or delivery time.');
+    L.push('Please confirm availability and the estimated preparation or delivery time.');
     return L.join('\n');
   }
   var MAX_URL = 7000;

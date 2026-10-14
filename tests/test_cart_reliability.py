@@ -69,7 +69,7 @@ with sync_playwright() as pw:
     rv=T(pg,'#drawerBody')+T(pg,'#drawerFoot'); m=wa(pg).replace('\xa0',' ')
     check('7 review: total == catalog sum, no fee line for pickup', money(exp) in T(pg,'#drawerFoot') and 'Dërgesa' not in T(pg,'#drawerFoot'))
     check('7 review says the order is NOT sent yet', 'nuk është dërguar' in rv.lower())
-    check('7 WhatsApp message: lines, subtotal and TOTAL from catalog', all(f"Item total: {money(P[i]['price']*q)}" in m for i,q in want.items()) and f'TOTAL: {money(exp)}' in m and f'Subtotal: {money(exp)}' in m, m[-300:])
+    check('7 WhatsApp message: lines, subtotal and TOTAL from catalog', all(f"{P[i]['name']['sq'].split(' / ')[0]} × {q}\nUnit price: {money(P[i]['price'])}\nItem total: {money(P[i]['price']*q)}" in m for i,q in want.items()) and f'TOTAL: {money(exp)}' in m and f'Subtotal: {money(exp)}' in m, m[-300:])
     pg.click('#toStep2b'); fill(pg,type_='delivery'); pg.click('#toStep3'); pg.wait_for_selector('#waSend'); m=wa(pg)
     # delivery 400 minimum satisfied here (exp>400). Fee must never be silently added
     check('7 delivery with unverified fee: fee shown as "to be confirmed", total excludes it', 'Delivery fee: to be confirmed' in m and f'TOTAL: {money(exp)} (excluding delivery fee)' in m, m[-260:])
@@ -82,7 +82,7 @@ with sync_playwright() as pw:
     fill(pg,name='Ëndrit Çela <i>x</i>',type_='delivery',addr='Rr. "Sadik Zotaj" 12/B, kati 2\nVlorë',note=weird+'z'*400)
     pg.click('#toStep3'); pg.wait_for_selector('#waSend'); rv=pg.inner_html('#drawerBody')
     check('6 HTML in name/notes is escaped on the review screen (no injected tags)', '<script' not in rv and '<i>' not in rv and '&lt;script&gt;' in rv and pg.evaluate("window.__x===undefined"))
-    m=wa(pg); check('6 message keeps special chars, one line per field, notes <=300', 'Çela' in m and '🍕' in m and 'Rr. "Sadik Zotaj" 12/B, kati 2 Vlorë' in m and '%20 #hash ?x=1&y=2' in m and len(re.search(r'Additional notes: (.*)',m).group(1))<=300, m[:600])
+    m=wa(pg); check('6 message keeps special chars, one line per field, notes <=300', 'Çela' in m and '🍕' in m and 'Address: Rr. "Sadik Zotaj" 12/B, kati 2 Vlorë' in m and '%20 #hash ?x=1&y=2' in m and len(re.search(r'Additional notes: (.*)',m).group(1))<=300, m[:600])
     check('6 URL is valid and not too long', len(pg.get_attribute('#waSend','href'))<7000 and pg.get_attribute('#waSend','href').startswith('https://wa.me/355693812566?text='))
     check('6 no console/page errors with odd input', not errs, errs[:2]); ctx.close()
     # lone surrogate (emoji cut in half by a paste/limit) must not break the link

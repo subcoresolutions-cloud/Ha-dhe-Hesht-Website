@@ -49,9 +49,9 @@ with sync_playwright() as pw:
         href=pg.get_attribute('#waSend','href'); m=urllib.parse.unquote(href.split('?text=',1)[1])
         check(f'{label}: destination is 355693812566', href.startswith('https://wa.me/355693812566?text='))
         # details match
-        check(f'{label}: message carries every checkout field', all(x in m for x in ['Customer: Besnik Çela','Phone: +355 69 555 1234','Order type: Delivery','Delivery address: Lagjja Pavarësia, Rr. Sadik Zotaj 12 Vlorë','Location details: Pranë Diambe Market, kati 2, zilja "Çela"','Additional notes: Pa ngut, thirrni para se të vini.','Notes: pa djathë & shtesë “ullinj” 100%']), m)
+        check(f'{label}: message carries every checkout field', all(x in m for x in ['Customer: Besnik Çela','Phone: +355 69 555 1234','Order type: Delivery','Address: Lagjja Pavarësia, Rr. Sadik Zotaj 12 Vlorë','Location details: Pranë Diambe Market, kati 2, zilja "Çela"','Additional notes: Pa ngut, thirrni para se të vini.','Options/notes: pa djathë & shtesë “ullinj” 100%']), m)
         # every line in message == cart == catalog price
-        got=re.findall(r'\d+\. (.+)\nQuantity: (\d+)\nUnit price: ([\d.]+) ALL\nItem total: ([\d.]+) ALL',m)
+        got=re.findall(r'(?m)^(.+) × (\d+)\nUnit price: ([\d.]+) ALL\nItem total: ([\d.]+) ALL',m)
         okl=len(got)==len(cart)
         for (nm,q,u,t),l in zip(got,cart):
             pr=P[l['id']]; okl&= nm.startswith(pr['name']['sq']) and int(q)==l['qty'] and int(u.replace('.',''))==pr['price'] and int(t.replace('.',''))==pr['price']*l['qty']

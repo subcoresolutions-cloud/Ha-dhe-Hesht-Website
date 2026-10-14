@@ -66,7 +66,7 @@ with sync_playwright() as pw:
     msg=urllib.parse.unquote(href.split('text=',1)[1])
     check('WA message total == catalog total', money(exp) in msg.replace('\xa0',' '), msg[-250:])
     m2=msg.replace('\xa0',' ')
-    ok=all((P[i]['name']['sq'].split(' / ')[0] in m2) and (f"Unit price: {money(P[i]['price'])}" in m2) and (f"Item total: {money(P[i]['price']*q)}" in m2) and (f"Quantity: {q}" in m2) for i,q in pick.items())
+    ok=all((P[i]['name']['sq'].split(' / ')[0] in m2) and (f"Unit price: {money(P[i]['price'])}" in m2) and (f"Item total: {money(P[i]['price']*q)}" in m2) and (f" × {q}\n" in m2) for i,q in pick.items())
     check('WA message has every product with qty, unit price and line total from the catalog', ok, m2[:500])
     check('no console errors', not errs, errs[:2])
     # delivery below minimum is blocked (fresh cart: one 180 ALL drink)

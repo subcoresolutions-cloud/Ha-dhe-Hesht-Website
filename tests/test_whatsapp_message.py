@@ -21,9 +21,9 @@ with sync_playwright() as p:
     check('number normalized', href.startswith('https://wa.me/355693812566?text='))
     msg=urllib.parse.unquote(href.split('?text=',1)[1]); print(msg)
     check('no raw newline/space in url', ' ' not in href and '\n' not in href and '%0A' in href)
-    check('header', msg.startswith('NEW ORDER — HA DHE HESHT\nCustomer: Ëndrra Çela\nPhone: +355 69 111 2233\nOrder type: Delivery\nDelivery address: Rr. “Ismail Qemali”, Nr. 5, Vlorë\nLocation details: https://maps.google.com/?q=40.44,19.49&z=17\nORDER DETAILS\n\n1. '))
-    check('items', 'Quantity: 2' in msg and 'Notes: Pa ullinj & shtesë djathë, 50% më pak kripë #1' in msg and msg.count('Unit price:')==3 and msg.count('Item total:')==3)
-    check('closing', msg.endswith('Please confirm this order and its estimated preparation or delivery time.'))
+    check('header', msg.startswith('NEW ORDER — HA DHE HESHT\nCustomer: Ëndrra Çela\nPhone: +355 69 111 2233\nOrder type: Delivery\nAddress: Rr. “Ismail Qemali”, Nr. 5, Vlorë\nLocation details: https://maps.google.com/?q=40.44,19.49&z=17\nORDER ITEMS\n'))
+    check('items', ' × 2\n' in msg and 'Options/notes: Pa ullinj & shtesë djathë, 50% më pak kripë #1' in msg and msg.count('Unit price:')==3 and msg.count('Item total:')==3)
+    check('closing', msg.endswith('Please confirm availability and the estimated preparation or delivery time.'))
     check('long note intact', ('Shënim shumë i gjatë. '*3) in msg and '🍕' in msg and '"Ëmbël" ç#1+2?' in msg)
     # total consistency with screen
     tot=int(re.search(r'TOTAL: ([\d.]+) ALL',msg).group(1).replace('.',''))
@@ -43,7 +43,7 @@ with sync_playwright() as p:
     # pickup variant
     pg.click('#backToReview'); pg.click('#toStep2b'); pg.check('input[value=pickup]'); pg.click('#toStep3'); pg.wait_for_selector('#waSend')
     m2=urllib.parse.unquote(pg.get_attribute('#waSend','href').split('?text=',1)[1])
-    check('pickup omits address & fee', 'Order type: Pickup' in m2 and 'Delivery address' not in m2 and 'Delivery fee' not in m2 and 'excluding' not in m2)
+    check('pickup omits address & fee', 'Order type: Pickup' in m2 and 'Address:' not in m2 and 'Delivery fee' not in m2 and 'excluding' not in m2)
     # pickup note-less
     check('no console errors', not errs, str(errs))
     # number normalization unit
