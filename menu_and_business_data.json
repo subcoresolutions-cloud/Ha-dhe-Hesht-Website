@@ -1,0 +1,473 @@
+{
+  "research_checked": "2026-10-14",
+  "business": {
+    "public_name": "Ha dhe Hesht",
+    "alternate_names": [
+      "Pizzeria Ha dhe Hesht",
+      "Bar Pizzeri Ha dhe Hesht"
+    ],
+    "type": [
+      "bar",
+      "pizzeria"
+    ],
+    "instagram_handle": "@hadhehesht",
+    "instagram_url": "https://www.instagram.com/hadhehesht/",
+    "tagline_sq": "Pica pa fjalë, shije me zë!",
+    "tagline_en": "Speechless pizza, flavor that speaks!",
+    "phone_local": "069 381 2566",
+    "phone_international": "+355 69 381 2566",
+    "city": "Vlorë (Vlora)",
+    "country": "Albania",
+    "postal_area": "9400",
+    "plus_code": "FF9P+W6 Vlorë",
+    "landmark_description_sq": "Tek Kryqezim Omonies ngjitur me Diambe Market ne kend te shkolles private Internacional.",
+    "landmark_description_en": "Near the Omonia intersection, next to Diambe Market, at the corner by the private International school. Confirm exact wording/address with the owner.",
+    "wolt_url_sq": "https://wolt.com/sq/alb/vlora/restaurant/pizzeria-ha-dhe-hesht",
+    "wolt_url_en": "https://wolt.com/en/alb/vlora/restaurant/pizzeria-ha-dhe-hesht",
+    "se_meny_url": "https://www.meny.semeny.no/public/al/sted/pizzeriahadhehesht",
+    "hours": {
+      "wolt_delivery": "Daily 11:00–23:00",
+      "se_meny_listing": "Daily 09:00–21:00",
+      "note": "Published sources differ; confirm with the business before website publication."
+    },
+    "ratings_platform_specific": [
+      {
+        "source": "Wolt search/category listing",
+        "score": "8.2",
+        "note": "Recheck before displaying."
+      },
+      {
+        "source": "Google/business listing returned in local search",
+        "score": "4.6/5",
+        "review_count": 32,
+        "note": "Third-party snapshot; recheck."
+      },
+      {
+        "source": "SE MENY",
+        "score": "4.5/5",
+        "review_count": 25,
+        "note": "Third-party snapshot; recheck."
+      }
+    ],
+    "official_logo": {
+      "status": "not_retrieved",
+      "reason": "Direct Instagram access was throttled and the third-party listing did not expose an unambiguous original logo download.",
+      "instruction": "Retrieve the avatar directly from the official Instagram profile or ask the owner for a PNG/SVG. Do not treat stock/food imagery as the brand logo."
+    }
+  },
+  "menu_summary": {
+    "total_listed_items": 62,
+    "counts_by_category": {
+      "pizza": 17,
+      "sandwich": 18,
+      "soft_drink": 20,
+      "beer": 7
+    },
+    "currency": "ALL (Albanian lek)",
+    "note": "Menu variants and prices can differ by platform; confirm with restaurant before publishing."
+  },
+  "menu": [
+    {
+      "category": "pizza",
+      "name": "Pizza Margerita / Margherita",
+      "price_all": 500,
+      "description": "Sauce, mozzarella"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Napoli",
+      "price_all": 700,
+      "description": "Sauce, mozzarella, anchovies, capers"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Tonno / Tuna Pizza",
+      "price_all": 700,
+      "description": "Sauce, mozzarella, tuna, onion, olives"
+    },
+    {
+      "category": "pizza",
+      "name": "Omonia Pizza",
+      "price_all": 700,
+      "description": "Sauce, mozzarella, ham, mushrooms"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Primo Amore",
+      "price_all": 650,
+      "description": "Sauce, mozzarella, arugula, pomodorini (cherry tomatoes), grana"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Italia / Pizza Italy",
+      "price_all": 850,
+      "description": "Sauce, mozzarella, prosciutto crudo, arugula, pomodorini, grana"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza me Proshutë / Pizza with Ham",
+      "price_all": 650,
+      "description": "Sauce, mozzarella, ham"
+    },
+    {
+      "category": "pizza",
+      "name": "Milanez Pizza / Milanese Pizza",
+      "price_all": 650,
+      "description": "Sauce, mozzarella, Milanese sausage"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Shef / Pizza Chef",
+      "price_all": 550,
+      "description": "Sauce, mozzarella, arugula, pomodorini / tomatoes"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Speciale / Special Pizza",
+      "price_all": 750,
+      "description": "Sauce, mozzarella, ham, pancetta, peppers, olives, salami"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Ha & Hesht / Pizza Eat & Shut Up",
+      "price_all": 800,
+      "description": "Sauce, mozzarella, spicy salami, gorgonzola, pancetta"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza 4 Stinet / 4 Seasons",
+      "price_all": 750,
+      "description": "Sauce, mozzarella, ham, mushrooms, salami, tuna"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza 1 Drras Mangët / 1 Drras Manget",
+      "price_all": 900,
+      "description": "Sauce, mozzarella, bresaola, burrata"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Kapricoza / Capricciosa",
+      "price_all": 750,
+      "description": "Sauce, mozzarella, ham, mushrooms, peppers; olives on Wolt listing, onions on SE MENY listing"
+    },
+    {
+      "category": "pizza",
+      "name": "Pizza Dashnorja / Pizza Lover",
+      "price_all": 750,
+      "description": "Sauce, mozzarella, spicy salami, mushrooms, pomodorini"
+    },
+    {
+      "category": "pizza",
+      "name": "Calzone",
+      "price_all": 650,
+      "description": "Sauce, mozzarella, ham, mushrooms, peppers"
+    },
+    {
+      "category": "pizza",
+      "name": "Mexican Pizza",
+      "price_all": 650,
+      "description": "Sauce, mozzarella, tuna, corn; shown on SE MENY listing, not in Wolt snapshot"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Tonno / Tuna Sandwich",
+      "price_all": 250,
+      "description": "Sauce, mozzarella, tuna, onion, tomato, cucumber, olives"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Proshut Pule / Chicken Ham Sandwich",
+      "price_all": 250,
+      "description": "Sauce, mozzarella, chicken ham, green salad, tomato, cucumber"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Shtepie / Homemade Sandwich",
+      "price_all": 250,
+      "description": "Sauce, mozzarella, homemade sausage, green salad, tomato, cucumber"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Pikant / Spicy Sandwich 🌶️",
+      "price_all": 250,
+      "description": "Sauce, mozzarella, spicy salami, arugula, tomatoes"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Vegjetarian / Vegetarian Sandwich",
+      "price_all": 250,
+      "description": "Sauce, mozzarella, white cheese, onion, peppers, olives, tomatoes, cucumber"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç me Salçiçe / Sausage Sandwich",
+      "price_all": 300,
+      "description": "Sauce, mozzarella, chicken sausage, arugula, green salad, tomatoes"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç me Sallam Milanez / Milanese Salami Sandwich",
+      "price_all": 300,
+      "description": "Sauce, mozzarella, Milanese sausage, arugula, tomatoes"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Krudo / Crudo Sandwich",
+      "price_all": 330,
+      "description": "Sauce, mozzarella, prosciutto crudo, grana, arugula, tomatoes / pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Pançet / Bacon-Pancetta Sandwich",
+      "price_all": 300,
+      "description": "Sauce, mozzarella, pancetta, green salad, tomato, cucumber"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Ha & Hesht / Eat & Shut Up Sandwich 🌶️",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, gorgonzola, spicy salami, arugula, tomatoes / pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Sinjorita / Signorita Sandwich",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, truffle, sardines, onions"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Dashnoria / Love Sandwich 🌶️",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, spicy salami, mushrooms, pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Gjerman / German Sandwich",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, pancetta, Parma ham"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç i Djallit / Devil’s Sandwich",
+      "price_all": 350,
+      "description": "Mozzarella, pesto, smoked sausage, pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Instambull / Istanbul Sandwich",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, chicken ham, pickled cucumber, olives"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç 1 Drras Mangét / Sandwich 1 Drras Mango",
+      "price_all": 350,
+      "description": "Sauce, mozzarella, bresaola, parmigiano, pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Vlora 🌶️ / Vlora Sandwich",
+      "price_all": 450,
+      "description": "Sauce, mozzarella, beef ham, spicy salami, sausage, olives, pomodorini"
+    },
+    {
+      "category": "sandwich",
+      "name": "Sanduiç Ha & Hesht 2 / Sandwich Eat & Shut Up 2",
+      "price_all": 450,
+      "description": "Sauce, mozzarella ball, Milanese salami, “capa” (as rendered on listing), gorgonzola, pomodorini, arugula"
+    },
+    {
+      "category": "soft_drink",
+      "name": "Ujë Spring / Spring Water",
+      "price_all": 100,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Ujë Glina / Glina Water",
+      "price_all": 100,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Ujë Tonic / Tonic Water",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Dhallë / Buttermilk",
+      "price_all": 100,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Fanta Portokall / Fanta Orange",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Fanta Exotic",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Coca-Cola",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Pepsi Max",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Ivi Kajsi / Ivi Apricot",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Ivi Limon / Ivi Lemon",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Lemon Soda",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Orange Soda",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Lipton Lemon",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Bravo Mollë / Bravo Apple",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Bravo Luleshtrydhe / Bravo Strawberry",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Bravo Rrushi / Bravo Grape",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Bravo Pjeshkë / Bravo Peach",
+      "price_all": 180,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Dragon energy drink",
+      "price_all": 200,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Golden Eagle energy drink",
+      "price_all": 200,
+      "description": ""
+    },
+    {
+      "category": "soft_drink",
+      "name": "Red Bull",
+      "price_all": 300,
+      "description": ""
+    },
+    {
+      "category": "beer",
+      "name": "Kaon Lager",
+      "price_all": 200,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Korça",
+      "price_all": 200,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Bavaria",
+      "price_all": 200,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Moretti",
+      "price_all": 250,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Heineken",
+      "price_all": 300,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Elbar",
+      "price_all": 200,
+      "description": "5% vol shown on Wolt; 18+ label"
+    },
+    {
+      "category": "beer",
+      "name": "Amstel",
+      "price_all": 250,
+      "description": "5% vol shown on Wolt; 18+ label"
+    }
+  ],
+  "website_recommendations": [
+    "Hero: Ha dhe Hesht — Pica pa fjalë, shije me zë!",
+    "Primary calls to action: Call to order, Order on Wolt, Get directions, View menu.",
+    "Menu filters: Pizza, Sandwiches, Soft drinks, Beer; display ingredients and prices in ALL/lek.",
+    "Use Albanian as the primary language; consider an English version.",
+    "Reconcile public-hours discrepancy before showing opening hours.",
+    "Do not invent claims about delivery radius, delivery fees, payment methods, reservations, dine-in amenities, dietary suitability or allergens."
+  ],
+  "sources": [
+    {
+      "name": "Instagram public profile",
+      "url": "https://www.instagram.com/hadhehesht/",
+      "use": "Profile identity and indexed snippet with phone and landmarks; direct page access throttled."
+    },
+    {
+      "name": "Wolt Albanian menu",
+      "url": "https://wolt.com/sq/alb/vlora/restaurant/pizzeria-ha-dhe-hesht",
+      "use": "Prices, item descriptions, phone, plus-code location, daily delivery hours."
+    },
+    {
+      "name": "Wolt English menu",
+      "url": "https://wolt.com/en/alb/vlora/restaurant/pizzeria-ha-dhe-hesht",
+      "use": "English item names, descriptions and prices."
+    },
+    {
+      "name": "SE MENY listing",
+      "url": "https://www.meny.semeny.no/public/al/sted/pizzeriahadhehesht",
+      "use": "62-item menu count, additional menu entries, listing hours and rating."
+    }
+  ]
+}
