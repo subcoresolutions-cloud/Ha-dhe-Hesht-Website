@@ -32,5 +32,10 @@ ok(canon && base === new URL(canon).pathname, '404.html <base> (' + base + ') ma
 var hcsp = rd('_headers').split('\n').filter(function (l) { return /Content-Security-Policy/.test(l); })[0].split(': ').slice(1).join(': ').trim();
 var mcsp = (html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/) || [])[1];
 ok(mcsp === hcsp.split('; ').filter(function (d) { return d.indexOf('frame-ancestors') !== 0; }).join('; '), 'CSP meta tag equals _headers policy');
+// the phone number shown as plain text before JS runs (hero button, noscript) must equal js/data.js
+(function () {
+  var d = rd('js/data.js'), disp = (d.match(/phoneDisplay:\s*"([^"]*)"/) || [])[1];
+  ok(disp && (html.match(new RegExp(disp.replace(/ /g, '\\s'), 'g')) || []).length >= 2, 'default phone text in index.html (hero + noscript) equals js/data.js phoneDisplay (' + disp + ')');
+})();
 ok(fs.existsSync(path.join(root, '.nojekyll')), '.nojekyll present (files and folders are served as they are)');
 process.exit(bad ? 1 : 0);

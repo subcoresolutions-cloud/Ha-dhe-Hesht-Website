@@ -318,6 +318,7 @@ dialog::backdrop{background:rgba(20,16,12,.62)}
 .field textarea#fAddr{min-height:72px}
 .field .choice,fieldset .choice{display:flex;font-weight:600;margin-bottom:6px}
 .link-btn{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;min-height:24px}
+.site-footer .link-btn,footer .link-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 10px}
 #privDialog{max-width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto}
 #privDialog h3{font-size:1rem;margin:var(--s4) 0 2px}
 #privDialog p{margin:0}
@@ -382,3 +383,12 @@ dialog::backdrop{background:rgba(20,16,12,.62)}
 }
 @media (max-width:560px){.biz-head{flex-direction:column;align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Short phone screens (e.g. 320x568, 360x640): keep the checkout form usable by compacting the totals footer */
+@media (max-height:700px){
+  .drawer-foot{gap:6px;padding-top:8px}
+  .totals{gap:2px;font-size:.95rem}
+  .totals .grand{font-size:1.1rem}
+  .drawer-foot>.hint{display:none}
+  .drawer-foot .foot-actions .btn{min-height:44px}
+}
