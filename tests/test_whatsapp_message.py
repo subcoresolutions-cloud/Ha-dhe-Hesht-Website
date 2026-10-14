@@ -21,7 +21,7 @@ with sync_playwright() as p:
     check('number normalized', href.startswith('https://wa.me/355693812566?text='))
     msg=urllib.parse.unquote(href.split('?text=',1)[1]); print(msg)
     check('no raw newline/space in url', ' ' not in href and '\n' not in href and '%0A' in href)
-    check('header', msg.startswith('NEW ORDER — HÀ DHE HESHT\nCustomer: Ëndrra Çela\nPhone: +355 69 111 2233\nOrder type: Delivery\nDelivery address: Rr. “Ismail Qemali”, Nr. 5, Vlorë\nLocation details: https://maps.google.com/?q=40.44,19.49&z=17\nORDER DETAILS\n\n1. '))
+    check('header', msg.startswith('NEW ORDER — HA DHE HESHT\nCustomer: Ëndrra Çela\nPhone: +355 69 111 2233\nOrder type: Delivery\nDelivery address: Rr. “Ismail Qemali”, Nr. 5, Vlorë\nLocation details: https://maps.google.com/?q=40.44,19.49&z=17\nORDER DETAILS\n\n1. '))
     check('items', 'Quantity: 2' in msg and 'Notes: Pa ullinj & shtesë djathë, 50% më pak kripë #1' in msg and msg.count('Unit price:')==3 and msg.count('Item total:')==3)
     check('closing', msg.endswith('Please confirm this order and its estimated preparation or delivery time.'))
     check('long note intact', ('Shënim shumë i gjatë. '*3) in msg and '🍕' in msg and '"Ëmbël" ç#1+2?' in msg)

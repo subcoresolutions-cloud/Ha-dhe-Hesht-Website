@@ -1,11 +1,11 @@
 /*
- * HÀ DHE HESHT — SITE SETTINGS  (business info, services, ordering rules)
+ * HA DHE HESHT — SITE SETTINGS  (business info, services, ordering rules)
  * The MENU is NOT here any more: edit data/menu.js (products, prices, sizes, extras, availability).
  * Source of initial data: public listings (Wolt, SE MENY, Instagram), checked 14 Oct 2026. Confirm everything before launch.
  */
 window.HDH = {
   business: {
-    name: "Hà dhe Hesht",
+    name: "Ha dhe Hesht",
     tagline_sq: "Pica pa fjalë, shije me zë!",
     tagline_en: "Speechless pizza, flavor that speaks!",
     phoneDisplay: "069 381 2566",
@@ -20,10 +20,10 @@ window.HDH = {
     instagramUrl: "https://www.instagram.com/hadhehesht/",
     instagramHandle: "@hadhehesht",
     woltUrl: "https://wolt.com/sq/alb/vlora/restaurant/pizzeria-ha-dhe-hesht",
-    // Opening hours: public sources disagree (Wolt delivery 11:00–23:00, SE MENY 09:00–21:00).
-    // Leave null until the owner confirms; then write e.g. "Çdo ditë 11:00–23:00".
-    hours_sq: null,
-    hours_en: null,
+    // Opening hours: confirmed by the owner on 15 Oct 2026 as 11:00–23:00 (days of the week not stated, so none are claimed).
+    // Older public listings disagreed (SE MENY showed 09:00–21:00); the owner's answer wins.
+    hours_sq: "Çdo ditë nga ora 11:00 deri në 23:00",
+    hours_en: "11:00–23:00",
     // Or a day-by-day list once confirmed, e.g. [{ days_sq:"E hënë – E diel", days_en:"Monday – Sunday", time:"11:00–23:00" }]. Overrides hours_sq/en when set.
     hoursList: null,
     // Optional contact details: leave null to hide them. Never add one that is not the business's own.
@@ -38,11 +38,11 @@ window.HDH = {
     payment_en: null,
     // About-us text (editable). Only state things you can stand behind; add a real story/photos when you have them.
     about_sq: [
-      "Hà dhe Hesht është pizzeri dhe bar në Vlorë, pranë kryqëzimit të Omonias. Në menu gjen pica, sanduiçe, pije freskuese dhe birra.",
+      "Ha dhe Hesht është pizzeri dhe bar në Vlorë, pranë kryqëzimit të Omonias. Në menu gjen pica, sanduiçe, pije freskuese dhe birra.",
       "Emri e thotë vetë: kur pica është e mirë, fjalët teprojnë. Prandaj thënia jonë: “Pica pa fjalë, shije me zë!”. Disa nga artikujt e menusë mbajnë emrin e shtëpisë, si Pizza Ha & Hesht dhe Sanduiçi Ha & Hesht."
     ],
     about_en: [
-      "Hà dhe Hesht is a pizzeria and bar in Vlorë, near the Omonia intersection. The menu has pizza, sandwiches, soft drinks and beer.",
+      "Ha dhe Hesht is a pizzeria and bar in Vlorë, near the Omonia intersection. The menu has pizza, sandwiches, soft drinks and beer.",
       "The name says it all: when the pizza is good, words are too much. Hence our line: “Speechless pizza, flavor that speaks!”. A few menu items carry the house name, like the Ha & Hesht pizza and sandwich."
     ]
   },
@@ -53,11 +53,13 @@ window.HDH = {
     pickup:   { enabled: true },
     delivery: {
       enabled: true,
-      // Fee and minimum are applied ONLY if "verified" is true. Until the business confirms them keep it false:
-      // the site then never adds a fee or enforces a minimum, and shows "confirmed on WhatsApp" instead.
+      // Each rule is applied ONLY once its own flag is true (a flag left out falls back to "verified").
+      // Until the business confirms a value keep its flag false: the site then never adds it and shows "confirmed on WhatsApp".
       verified: false,
+      feeVerified: false,
       fee: null,                             // number (lek) added to delivery orders, or null = "confirmed on WhatsApp"
-      minOrder: null,                        // number (lek) minimum for delivery, or null = none
+      minOrderVerified: true,                // owner confirmed a 400 ALL minimum on 15 Oct 2026
+      minOrder: 400,                         // number (lek) minimum for delivery orders, or null = none
       requireLocation: false,                // true = customers must also give location details / a map link for delivery
       area_sq: null,                         // delivery area text once confirmed, e.g. "Vlorë qendër"
       area_en: null,

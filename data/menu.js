@@ -1,5 +1,5 @@
 /*
- * HÀ DHE HESHT – MENU CATALOG  (this is the file to edit when the menu changes)
+ * HA DHE HESHT – MENU CATALOG  (this is the file to edit when the menu changes)
  * ---------------------------------------------------------------------------
  * The content below is plain JSON assigned to window.HDH_MENU. Keep the commas and quotes valid.
  * After editing, run   node tools/check-menu.js   (optional) or just open the site: invalid items are skipped and reported in the browser console.

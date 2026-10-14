@@ -106,7 +106,7 @@ with sync_playwright() as p:
     nocur=data.replace('currencyLabel: "ALL",','')
     ctx,pg,L=mk(b,datajs=nocur); pg.goto(BASE); pg.wait_for_selector('#menuList .item'); check('missing currencyLabel falls back to ALL, no "undefined"', 'undefined' not in pg.inner_text('body') and ' ALL' in pg.inner_text('#menuList')); ctx.close()
     # verified delivery fee math + minimum
-    fee=data.replace('verified: false','verified: true').replace('fee: null','fee: 200').replace('minOrder: null','minOrder: 1000')
+    fee=data.replace('verified: false','verified: true').replace('fee: null','fee: 200').replace('feeVerified: false','feeVerified: true').replace('minOrder: 400,','minOrder: 1000,')
     ctx,pg,L=mk(b,datajs=fee); pg.goto(BASE); pg.wait_for_selector('#menuList .item')
     pg.fill('#search','heineken'); pg.wait_for_timeout(250); pg.click('#menuList .item >> nth=0 >> [data-act=add]'); pg.click('#cartBtn'); pg.click('#toStep2'); pg.check('input[value=delivery]'); pg.fill('#fName','Test'); pg.fill('#fPhone','069 381 2566'); pg.fill('#fAddr','Rr X 1'); pg.check('#fAge'); pg.click('#toStep3')
     check('below delivery minimum is blocked', pg.locator('#waSend').count()==0 and pg.locator('#e-min').count()==1)

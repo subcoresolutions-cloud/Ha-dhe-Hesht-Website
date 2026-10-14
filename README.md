@@ -1,4 +1,4 @@
-# Hà dhe Hesht – ordering website
+# Ha dhe Hesht – ordering website
 
 Plain HTML/CSS/JS. No build step, no dependencies. Open `index.html`, or upload the folder to any static host (Netlify, Cloudflare Pages, GitHub Pages, cPanel).
 
@@ -96,3 +96,7 @@ Upload the whole folder to any static host (Netlify, Cloudflare Pages, GitHub Pa
 Collected: name, phone, address (delivery only), optional location and notes, cart. Not collected: payment data, email, accounts, analytics. Stored only in the visitor's browser (localStorage keys `hdh_cart_v1`, `hdh_customer_v1`, `hdh_last_order_v1`, `hdh_lang`); a button in the notice erases the saved details. The order text goes to WhatsApp only when the customer presses Send there. The owner is responsible for how the received WhatsApp messages are kept; have a lawyer review the notice if required for your business.
 
 See `TEST_REPORT.md` for what was tested and what remains open.
+
+
+## Open questions
+Details that still need the owner's confirmation are listed in `NEEDS_CONFIRMATION.md`. Delivery fee/minimum use `feeVerified` / `minOrderVerified` in `js/data.js`.

@@ -1,4 +1,4 @@
-/* Hà dhe Hesht – ordering site logic. All business info and the menu live in js/data.js. No build step needed. */
+/* Ha dhe Hesht – ordering site logic. All business info and the menu live in js/data.js. No build step needed. */
 (function () {
   'use strict';
   if (!window.HDH || !window.HDH.business || !window.HDH.order) {
@@ -43,11 +43,11 @@
       sendHint: 'Do të hapet WhatsApp me porosinë të gatshme. Porosia konsiderohet e dërguar vetëm pasi ta shtypësh “Dërgo” në WhatsApp.',
       all: 'Të gjitha', noResults: 'Nuk u gjet asgjë. Provo një fjalë tjetër.', spicy: 'Pikant', age: '18+', items_n: 'artikuj',
       required: 'e detyrueshme', none: 'Asnjë', optTitle: 'Zgjidh opsionet', results: function (n) { return n + ' rezultate'; },
-      msgHead: 'Porosi e re – Hà dhe Hesht', msgNo: 'Nr. porosisë', msgName: 'Emri', msgPhone: 'Tel', msgType: 'Lloji', msgAddr: 'Adresa', msgItems: 'Artikujt',
+      msgHead: 'Porosi e re – Ha dhe Hesht', msgNo: 'Nr. porosisë', msgName: 'Emri', msgPhone: 'Tel', msgType: 'Lloji', msgAddr: 'Adresa', msgItems: 'Artikujt',
       msgSub: 'Nënshuma', msgFee: 'Dërgesa', msgFeeConf: 'për t’u konfirmuar', msgTotal: 'Totali', msgNote: 'Shënim', msgAge: 'Konfirmoj se jam mbi 18 vjeç.', msgItemNote: 'shënim',
       pickupName: 'Marrje në lokal', deliveryName: 'Dërgesë', steps: ['Shporta', 'Detajet', 'Rishiko'], thanks: 'Faleminderit!',
-      title: 'Hà dhe Hesht – Pica & sanduiçe në Vlorë | Porosit në WhatsApp',
-      intro: 'Hà dhe Hesht është pizzeri dhe bar në Vlorë. Zgjidh nga menuja me pica, sanduiçe, pije freskuese dhe birra, dhe porosit në pak hapa.',
+      title: 'Ha dhe Hesht – Pica & sanduiçe në Vlorë | Porosit në WhatsApp',
+      intro: 'Ha dhe Hesht është pizzeri dhe bar në Vlorë. Zgjidh nga menuja me pica, sanduiçe, pije freskuese dhe birra, dhe porosit në pak hapa.',
       each: 'për copë', lineTotal: 'Totali i rreshtit', cancel: 'Anulo', addMore: 'Shto më shumë', clearCart: 'Boshatis shportën', clearAsk: 'Të boshatisim shportën?', yesClear: 'Po, boshatis',
       cartTotalHint: 'Dërgesa (nëse e zgjedh) dhe totali përfundimtar shfaqen në hapin tjetër.', totalExDel: 'Totali (pa dërgesën)', feeLater: 'Dërgesa nuk është përfshirë: konfirmohet nga pizzeria në WhatsApp.',
       phoneHint: 'Çdo format pranohet (p.sh. 069 123 4567 ose +355 69 123 4567).', locOpt: 'Vendndodhja ose lidhje harte (opsionale)', locReq: 'Vendndodhja ose lidhje harte *', locHint: 'p.sh. lidhje nga Google Maps ose një pikë referimi.', locShort: 'Vendndodhja',
@@ -80,11 +80,11 @@
       sendHint: 'WhatsApp will open with your order ready. The order is only sent once you press “Send” in WhatsApp.',
       all: 'All', noResults: 'Nothing found. Try another word.', spicy: 'Spicy', age: '18+', items_n: 'items',
       required: 'required', none: 'None', optTitle: 'Choose options', results: function (n) { return n + ' results'; },
-      msgHead: 'New order – Hà dhe Hesht', msgNo: 'Order no.', msgName: 'Name', msgPhone: 'Phone', msgType: 'Type', msgAddr: 'Address', msgItems: 'Items',
+      msgHead: 'New order – Ha dhe Hesht', msgNo: 'Order no.', msgName: 'Name', msgPhone: 'Phone', msgType: 'Type', msgAddr: 'Address', msgItems: 'Items',
       msgSub: 'Subtotal', msgFee: 'Delivery', msgFeeConf: 'to be confirmed', msgTotal: 'Total', msgNote: 'Note', msgAge: 'I confirm I am 18 or older.', msgItemNote: 'note',
       pickupName: 'Pickup', deliveryName: 'Delivery', steps: ['Cart', 'Details', 'Review'], thanks: 'Thank you!',
-      title: 'Hà dhe Hesht – Pizza & sandwiches in Vlorë | Order on WhatsApp',
-      intro: 'Hà dhe Hesht is a pizzeria and bar in Vlorë. Pick from our pizza, sandwiches, soft drinks and beer, and order in a few steps.',
+      title: 'Ha dhe Hesht – Pizza & sandwiches in Vlorë | Order on WhatsApp',
+      intro: 'Ha dhe Hesht is a pizzeria and bar in Vlorë. Pick from our pizza, sandwiches, soft drinks and beer, and order in a few steps.',
       each: 'each', lineTotal: 'Line total', cancel: 'Cancel', addMore: 'Add more', clearCart: 'Empty the cart', clearAsk: 'Empty your cart?', yesClear: 'Yes, empty it',
       cartTotalHint: 'Delivery (if you choose it) and the final total are shown in the next step.', totalExDel: 'Total (excl. delivery)', feeLater: 'Delivery is not included: the pizzeria confirms it on WhatsApp.',
       phoneHint: 'Any format is accepted (e.g. 069 123 4567 or +355 69 123 4567).', locOpt: 'Location details or map link (optional)', locReq: 'Location details or map link *', locHint: 'e.g. a Google Maps link or a landmark.', locShort: 'Location',
@@ -122,7 +122,7 @@
     });
     $('#langBtn').textContent = lang === 'en' ? 'SQ' : 'EN';
     document.title = t('title');
-    var md = document.querySelector('meta[name=description]'); if (md) { if (!md.dataset.sq) md.dataset.sq = md.content; md.content = lang === 'en' ? 'Hà dhe Hesht, pizzeria in Vlorë, Albania. Browse the menu with prices in lek, add to your cart and send your order straight to WhatsApp.' : md.dataset.sq; }
+    var md = document.querySelector('meta[name=description]'); if (md) { if (!md.dataset.sq) md.dataset.sq = md.content; md.content = lang === 'en' ? 'Ha dhe Hesht, pizzeria in Vlorë, Albania. Browse the menu with prices in lek, add to your cart and send your order straight to WhatsApp.' : md.dataset.sq; }
     $('#heroTagline').textContent = lang === 'en' ? B.tagline_en : B.tagline_sq;
     $$('[data-bind="city"]').forEach(function (e) { e.textContent = pick(B, 'city'); });
     $$('[data-bind="landmarks"]').forEach(function (e) { e.textContent = pick(B, 'landmarks'); });
@@ -253,8 +253,8 @@
   function hasAlcohol() { return cart.some(function (l) { return byId[l.id].alcohol; }); }
   /* Money: everything is whole lek. Fees / minimums apply ONLY when js/data.js marks the delivery settings as verified. */
   function deliveryRules() {
-    var d = O.delivery, ok = d.verified === true;
-    return { fee: ok && typeof d.fee === 'number' && d.fee >= 0 ? Math.round(d.fee) : null, min: ok && typeof d.minOrder === 'number' && d.minOrder > 0 ? Math.round(d.minOrder) : null, requireLocation: d.requireLocation === true };
+    var d = O.delivery, okF = (d.feeVerified != null ? d.feeVerified : d.verified) === true, okM = (d.minOrderVerified != null ? d.minOrderVerified : d.verified) === true;
+    return { fee: okF && typeof d.fee === 'number' && d.fee >= 0 ? Math.round(d.fee) : null, min: okM && typeof d.minOrder === 'number' && d.minOrder > 0 ? Math.round(d.minOrder) : null, requireLocation: d.requireLocation === true };
   }
   function orderTotals() {
     var sub = subtotal(), del = co.type === 'delivery', r = deliveryRules(), fee = del && r.fee !== null ? r.fee : 0;
@@ -518,7 +518,7 @@
 
   function buildMessage() {
     var L = [], T_ = orderTotals(), del = co.type === 'delivery';
-    L.push('NEW ORDER — HÀ DHE HESHT');
+    L.push('NEW ORDER — HA DHE HESHT');
     L.push('Customer: ' + oneLine(co.name));
     L.push('Phone: ' + oneLine(co.phone));
     L.push('Order type: ' + (del ? 'Delivery' : 'Pickup'));
@@ -748,10 +748,10 @@
     if (O.pickup.enabled) sv += '<li><strong>' + esc(z.pickup) + '.</strong> ' + esc(z.pickupP) + '</li>';
     if (O.delivery.enabled) {
       var dv = '<li><strong>' + esc(z.delivery) + '.</strong> ';
-      if (O.delivery.verified) {
-        var parts = []; if (O.delivery.fee != null) parts.push(z.fee + ': ' + fmt(O.delivery.fee)); if (O.delivery.minOrder != null) parts.push(z.min + ': ' + fmt(O.delivery.minOrder)); var ar = pick(O.delivery, 'area'); if (ar) parts.push(z.area + ': ' + ar);
-        dv += esc(parts.join(' · '));
-      } else dv += esc(pick(O.delivery, 'note'));
+      var dr = deliveryRules(), parts = [], ar = O.delivery.verified ? pick(O.delivery, 'area') : '';
+      if (dr.fee != null) parts.push(z.fee + ': ' + fmt(dr.fee)); if (dr.min != null) parts.push(z.min + ': ' + fmt(dr.min)); if (ar) parts.push(z.area + ': ' + ar);
+      dv += esc(parts.join(' · ') + (parts.length ? '.' : ''));
+      if (dr.fee == null || !ar) dv += (parts.length ? ' ' : '') + esc(pick(O.delivery, 'note'));
       sv += dv + '</li>';
     }
     var pay = pick(B, 'payment'); if (pay) sv += '<li><strong>' + esc(z.payT) + ':</strong> ' + esc(pay) + '</li>';

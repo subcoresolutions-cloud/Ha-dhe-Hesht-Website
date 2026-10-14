@@ -6,7 +6,7 @@ Layout shift problems found and fixed during this pass: hero illustration, featu
 Still not tested: real phones and Safari/Firefox, screen readers, Lighthouse, real WhatsApp delivery.
 
 ---
-# Hà dhe Hesht – QA report (14 Oct 2026)
+# Ha dhe Hesht – QA report (14 Oct 2026)
 
 Environment: headless Chromium (Playwright), site served locally with the production CSP from `_headers`. Test scripts are in `tests/` (`sh tests/run_all.sh`). Last run: **menu audit OK; 35/35 checkout, 15/15 WhatsApp-message, 13/13 business-section, 70/70 QA-suite and 53/53 end-to-end journey checks passed (186 total); all JS files pass `node --check`.** There is no build step and no linter in the project, so those do not apply.
 
@@ -34,3 +34,12 @@ Fixed in this pass: menu intro text still said prices were in "(L)" (now "ALL");
 6. **Not tested:** real WhatsApp (mobile app / WhatsApp Web) receiving the message — only the generated link was verified; real phones and Safari/Firefox (only Chromium); screen readers; a formal accessibility audit (axe could not be installed in this environment) and colour-contrast measurement; Lighthouse scores. A legal review of the privacy notice was not performed.
 7. Minor: the footer "privacy notice" text link is 24 px high (meets the 24 px WCAG 2.2 minimum, below the 44 px used for main buttons).
 8. The JSON-LD phone and the `<noscript>` text are typed by hand; update them if the number changes.
+
+
+## Data & business-info addendum (15 Oct 2026)
+Owner answers applied: spelling "Ha dhe Hesht", hours 11:00–23:00, delivery minimum 400 ALL, WhatsApp number confirmed.
+- Menu audit: all 62 products match the research file on name, category and price; ingredient lists match the source text (3 flagged items unchanged). Wolt page re-read: hours, phone, Plus Code and the 15 pizza prices it lists match.
+- Delivery rules are now split: `minOrderVerified` and `feeVerified` (fallback `verified`). The minimum is enforced; the fee is still "confirmed on WhatsApp".
+- New `tests/test_menu_data.py` (29 checks): all four category filters, search (case, accents, English/Albanian, no result), card price format, food + drinks in one cart, cart/checkout/WhatsApp totals equal catalog prices, 400 ALL minimum blocks small delivery orders but not pickup.
+- Full suite: 263 checks, all passing (business 13, checkout 35, design 48, journey 53, menu data 29, QA 70, WhatsApp 15).
+- Open items: see NEEDS_CONFIRMATION.md.

@@ -91,7 +91,7 @@ with sync_playwright() as p:
 
     # ---- verified fee + minimum + required location
     ctx=b.new_context(viewport={'width':390,'height':844}); 
-    d2=data.replace('verified: false,','verified: true,').replace('fee: null,    ','fee: 150,     ').replace('minOrder: null,   ','minOrder: 1000,   ').replace('requireLocation: false,','requireLocation: true,')
+    d2=data.replace('verified: false,','verified: true,').replace('fee: null,    ','fee: 150,     ').replace('feeVerified: false','feeVerified: true').replace('minOrder: 400,','minOrder: 1000,').replace('requireLocation: false,','requireLocation: true,')
     ctx.route('**/js/data.js',lambda r:r.fulfill(body=d2,content_type='application/javascript'))
     pg=ctx.new_page(); pg.goto(BASE); pg.wait_for_selector('#menuList .item')
     pg.click('.item[data-id=p-margherita] [data-act=add]'); pg.click('#mobileCartBtn'); pg.click('#toStep2'); pg.check('input[value=delivery]')
