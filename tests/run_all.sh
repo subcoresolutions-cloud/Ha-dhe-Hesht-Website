@@ -6,5 +6,10 @@ for f in js/*.js data/menu.js tools/check-menu.js; do node --check "$f" || exit 
 export PORT=${PORT:-8766}
 python3 tests/serve.py & SRV=$!; sleep 1
 rc=0
-for t in tests/test_*.py; do echo "== $t"; python3 "$t" | tail -4; python3 "$t" | grep -q '^FAIL' && rc=1; done
+for t in tests/test_*.py; do
+  echo "== $t"
+  out=$(python3 "$t"); echo "$out" | tail -4
+  # A failed check prints "FAIL <name>"; the summary line "FAILED: []" is not a failure.
+  echo "$out" | grep -q '^FAIL ' && rc=1
+done
 kill $SRV 2>/dev/null; exit $rc
