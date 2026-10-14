@@ -36,6 +36,7 @@
       addressHint: 'Rruga, numri, pika referimi (p.sh. pranë Omonias).', ageOk: 'Konfirmoj se jam mbi 18 vjeç (shporta ka birrë).',
       eName: 'Shkruaj emrin.', ePhone: 'Shkruaj një numër telefoni të vlefshëm (7–15 shifra; lejohen +, hapësira, viza).', eAddress: 'Shkruaj adresën për dërgesë.', eAge: 'Duhet të konfirmosh moshën për të porositur birrë.',
       eMin: function (n) { return 'Porosia minimale për dërgesë është ' + fmt(n) + '.'; },
+      minShort: function (n) { return 'Shto edhe ' + fmt(n) + ' për të porositur me dërgesë, ose zgjidh marrjen në lokal.'; },
       review: 'Rishiko porosinë', send: 'Dërgo në WhatsApp', copy: 'Kopjo mesazhin', copied: 'Mesazhi u kopjua', edit: 'Ndrysho',
       type: 'Lloji', customer: 'Klienti', items: 'Artikujt', notes: 'Shënim',
       sentFb: function (n) { return 'Nuk u hap WhatsApp? Provo “Hap WhatsApp përsëri”, kopjo mesazhin dhe dërgoje te ' + n + ', ose telefono pizzerinë.'; }, sentT: 'U hap WhatsApp', sentP: 'Porosia vendoset vetëm kur ta shtypësh “Dërgo” në WhatsApp. Nëse nuk u hap ose e mbylle, hape përsëri ose kopjo mesazhin. Shporta ruhet derisa ta boshatisësh vetë.',
@@ -73,6 +74,7 @@
       addressHint: 'Street, number, landmark (e.g. near Omonia).', ageOk: 'I confirm I am 18 or older (your cart contains beer).',
       eName: 'Please enter your name.', ePhone: 'Please enter a valid phone number (7–15 digits; +, spaces and dashes are fine).', eAddress: 'Please enter the delivery address.', eAge: 'You must confirm your age to order beer.',
       eMin: function (n) { return 'The minimum order for delivery is ' + fmt(n) + '.'; },
+      minShort: function (n) { return 'Add ' + fmt(n) + ' more to order delivery, or choose pickup.'; },
       review: 'Review your order', send: 'Send on WhatsApp', copy: 'Copy message', copied: 'Message copied', edit: 'Edit',
       type: 'Type', customer: 'Customer', items: 'Items', notes: 'Note',
       sentFb: function (n) { return 'WhatsApp did not open? Try “Open WhatsApp again”, copy the message and send it to ' + n + ', or call the pizzeria.'; }, sentT: 'WhatsApp opened', sentP: 'Your order is only placed when you press “Send” in WhatsApp. If it did not open or you closed it, open it again or copy the message. Your cart is kept until you empty it yourself.',
@@ -213,11 +215,21 @@
     $$('[data-bind="menuCount"]').forEach(function (e) { e.textContent = items.length; });
     renderAll(); if (dropped) toast(t('cartUpdated'));
   }
+  /* Saved carts come from localStorage (untrusted: edited, corrupted, or from an older menu). Every line is rebuilt from
+     scratch with plain types; prices are never stored, they are always read from the catalog. */
   function sanitizeCart(list) {
-    var dropped = 0, out = (list || []).filter(function (l) {
-      var it = l && byId[l.id], ok = it && l.qty > 0 && orderable(it) && selValid(it, l.sel);
-      if (!ok && l && l.qty > 0) dropped++; return ok;
-    }).map(function (l) { l.qty = Math.min(Math.floor(l.qty), 99); l.key = lineKey(l.id, l.sel); return l; });
+    var dropped = 0, out = [], seen = {};
+    (Array.isArray(list) ? list : []).forEach(function (raw) {
+      if (!raw || typeof raw !== 'object') { dropped++; return; }
+      var q = Math.floor(Number(raw.qty)), id = typeof raw.id === 'string' ? raw.id : '', it = byId[id], rs = raw.sel && typeof raw.sel === 'object' ? raw.sel : {};
+      var sel = {}; if (typeof rs.size === 'string' && rs.size) sel.size = rs.size;
+      if (Array.isArray(rs.extras)) { var ex = rs.extras.filter(function (x) { return typeof x === 'string'; }); if (ex.length) sel.extras = ex; }
+      if (!(q > 0)) return;                                   // zero / negative / NaN quantity: silently ignore
+      if (!it || !orderable(it) || !selValid(it, sel)) { dropped++; return; }
+      var key = lineKey(id, sel), line = { key: key, id: id, qty: Math.min(q, 99), note: typeof raw.note === 'string' ? raw.note.slice(0, 200) : '', sel: sel };
+      if (seen[key]) { seen[key].qty = Math.min(seen[key].qty + line.qty, 99); return; }   // merge duplicate lines
+      seen[key] = line; out.push(line);
+    });
     return { list: out, dropped: dropped };
   }
   function renderAll() { renderHome(); renderTabs(); renderMenu(); updateBadges(); if (cartDlg && cartDlg.open) renderDrawer(); }
@@ -230,8 +242,9 @@
   };
 
   /* ---------- cart state ---------- */
-  var cart = []; pendingCart = store('hdh_cart_v1') || [];
-  var cust = store('hdh_customer_v1') || {};
+  var cart = []; pendingCart = store('hdh_cart_v1');
+  var cust = store('hdh_customer_v1'); if (!cust || typeof cust !== 'object' || Array.isArray(cust)) cust = {};
+  ['name', 'phone', 'address', 'location', 'orderNote'].forEach(function (k) { if (typeof cust[k] !== 'string') cust[k] = ''; });
   function services() { var s = []; if (O.pickup.enabled) s.push('pickup'); if (O.delivery.enabled) s.push('delivery'); return s; }
   var co = { step: 1, type: cust.type, name: cust.name || '', phone: cust.phone || '', address: cust.address || '', location: cust.location || '', orderNote: cust.orderNote || '',
              ageOk: false, errors: {}, orderId: null, orderSig: null, sent: false, sending: false, lockUntil: 0, confirmClear: false };
@@ -279,6 +292,15 @@
     if (!cart.length && co.step > 1) co.step = 1;
     if (cartDlg.open) renderDrawer();
   }
+
+  /* Another tab changed the saved cart: adopt it so two tabs never overwrite each other with stale data. */
+  window.addEventListener('storage', function (e) {
+    if (e.key !== 'hdh_cart_v1') return;
+    var v = null; try { v = e.newValue ? JSON.parse(e.newValue) : []; } catch (x) { v = []; }
+    if (catalogState !== 'ready') { pendingCart = v; return; }
+    cart = sanitizeCart(v).list; if (!cart.length && co.step > 1) co.step = 1; co.sent = co.sent && cart.length > 0;
+    afterCartChange();
+  });
 
   /* ---------- toast / badges ---------- */
   var toastT;
@@ -408,7 +430,8 @@
       h += '<div class="grand"><span>' + esc(T_.feePending ? t('totalExDel') : t('total')) + '</span><span>' + fmt(T_.total) + '</span></div>';
       hint = T_.feePending ? t('feeLater') : t('totalNote');
     }
-    return h + '</div><p class="hint">' + esc(hint) + '</p>';
+    var short = mode !== 'cart' && T_.delivery && deliveryRules().min && T_.subtotal < deliveryRules().min ? deliveryRules().min - T_.subtotal : 0;
+    return h + '</div><p class="hint">' + esc(hint) + '</p>' + (short ? '<p class="hint hint-warn" id="minShort">' + esc(t('minShort')(short)) + '</p>' : '');
   }
   function phoneValid(p) { p = String(p).trim(); if (!/^\+?[\d\s().\-\/]+$/.test(p)) return false; var d = p.replace(/\D/g, ''); return d.length >= 7 && d.length <= 15; }
 
@@ -514,7 +537,8 @@
     return d;
   }
   function msgMoney(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' ALL'; }
-  function oneLine(s) { return String(s || '').replace(/\s*[\r\n]+\s*/g, ' ').replace(/[ \t]+/g, ' ').trim(); }
+  function wellFormed(s) { return String(s).replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/g, function (m) { return m.length > 1 ? m.charAt(0) : ''; }); }
+  function oneLine(s) { return wellFormed(String(s || '')).replace(/\s*[\r\n]+\s*/g, ' ').replace(/[ \t]+/g, ' ').trim(); }
 
   function buildMessage() {
     var L = [], T_ = orderTotals(), del = co.type === 'delivery';

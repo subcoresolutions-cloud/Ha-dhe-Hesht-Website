@@ -91,6 +91,7 @@ ul,ol{margin:0}
 .field .err{color:#a3150b;font-weight:700;font-size:.9rem;margin-top:4px}
 .field [aria-invalid=true]{border-color:#a3150b}
 .hint{font-size:.88rem;color:var(--muted);margin:4px 0 0}
+.hint-warn{color:#8a2a00;font-weight:600}
 fieldset{border:0;padding:0;margin:0 0 var(--s4)}
 legend{font-weight:800;margin-bottom:6px;padding:0}
 .choice{display:flex;align-items:center;gap:10px;min-height:50px;padding:6px 14px;border:2px solid var(--line);border-radius:var(--r-sm);margin-bottom:6px;background:#fff;cursor:pointer;transition:border-color .15s,background-color .15s}

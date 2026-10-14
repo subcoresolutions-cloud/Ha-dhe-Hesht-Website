@@ -43,3 +43,12 @@ Owner answers applied: spelling "Ha dhe Hesht", hours 11:00–23:00, delivery mi
 - New `tests/test_menu_data.py` (29 checks): all four category filters, search (case, accents, English/Albanian, no result), card price format, food + drinks in one cart, cart/checkout/WhatsApp totals equal catalog prices, 400 ALL minimum blocks small delivery orders but not pickup.
 - Full suite: 263 checks, all passing (business 13, checkout 35, design 48, journey 53, menu data 29, QA 70, WhatsApp 15).
 - Open items: see NEEDS_CONFIRMATION.md.
+
+## Cart & checkout reliability addendum (15 Oct 2026)
+Audit result: the cart was already driven by one array (`cart`) with every amount computed from the catalog (`lineInfo` → `orderTotals`), used by the cart, review, badges and WhatsApp text. Fixes made:
+- **Corrupted or hand-edited saved data** (cart or customer record in localStorage) could make the whole menu fail to load. Saved carts are now rebuilt line by line with plain types: bad lines dropped, duplicates merged, quantity capped at 99, notes capped at 200, any stored price ignored.
+- **Two tabs** no longer overwrite each other: a change to the saved cart in one tab is adopted by the other.
+- **Half an emoji** (a lone surrogate) in a note or address could make the WhatsApp link throw; such characters are now removed from the message.
+- **Delivery minimum:** checkout now says how much to add (e.g. "Add 220 ALL more") instead of only failing on submit.
+- New `tests/test_cart_reliability.py` (45 checks): the eight requested cases, sizes/extras, double submit, duplicate-order warning, minimum, hostile storage, sold-out item in a saved cart, two tabs. Full suite: 308 checks passing.
+Known limits: no real phone/Safari/Firefox/WhatsApp-delivery testing; the order is never stored server-side (WhatsApp is the only channel), so the pizzeria sees it only when the customer presses Send in WhatsApp.
